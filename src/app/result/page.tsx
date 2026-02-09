@@ -7,9 +7,11 @@ import Header from "@/components/Header";
 import ScoreBars from "@/components/ScoreBars";
 import ShareAndCoupon from "@/components/ShareAndCoupon";
 import RecommendationCards from "@/components/RecommendationCards";
+import ProductCards from "@/components/ProductCards";
 import ShopModal from "@/components/ShopModal";
 import { skinTypeLabels, skinTypeDescriptions } from "@/lib/labels";
 import { recommendations } from "@/lib/recommendations";
+import { recommendProducts } from "@/lib/products";
 import type { DiagnosisResult } from "@/lib/types";
 
 const STORAGE_KEY = "skinDiagnosisResult";
@@ -56,6 +58,14 @@ export default function ResultPage() {
   }
 
   const { scores, primaryType, secondaryType } = result;
+  const { primary, secondary } = recommendProducts(primaryType, secondaryType);
+
+  // 全おすすめ商品を統合して配分:
+  // 1点目 → 内側の箱、2点目 → 外側の箱、残り3点 → 箱の下
+  const allRecommended = [...primary, ...secondary];
+  const insideProduct = allRecommended[0];
+  const outsideProduct = allRecommended[1];
+  const belowProducts = allRecommended.slice(2, 5);
 
   return (
     <div className="min-h-dvh px-4 py-10 sm:py-16">
@@ -95,7 +105,7 @@ export default function ResultPage() {
         {/* Share & Coupon */}
         <ShareAndCoupon />
 
-        {/* Recommendations - 2 sections */}
+        {/* Recommendations */}
         <div className="animate-fade-up stagger-4 mb-10">
           <div className="mb-6 text-center">
             <span className="inline-block rounded-full bg-sage/10 px-4 py-1.5 text-xs font-medium tracking-[0.1em] text-sage-dark">
@@ -105,10 +115,28 @@ export default function ResultPage() {
               おすすめアイテム
             </h2>
           </div>
+
+          {/* Inside / Outside boxes (1 product each) */}
           <div className="space-y-4">
-            <RecommendationCards section={recommendations.inside} />
-            <RecommendationCards section={recommendations.outside} />
+            <RecommendationCards
+              section={recommendations.inside}
+              featuredProduct={insideProduct}
+            />
+            <RecommendationCards
+              section={recommendations.outside}
+              featuredProduct={outsideProduct}
+            />
           </div>
+
+          {/* Additional recommended products (3 items below) */}
+          {belowProducts.length > 0 && (
+            <div className="mt-6">
+              <ProductCards
+                title="あなたの肌タイプにおすすめ"
+                products={belowProducts}
+              />
+            </div>
+          )}
         </div>
 
         {/* Action buttons */}

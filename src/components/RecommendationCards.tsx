@@ -1,9 +1,12 @@
 "use client";
 
 import type { RecommendationSection } from "@/lib/recommendations";
+import type { Product } from "@/lib/types";
 
 type RecommendationCardsProps = {
   section: RecommendationSection;
+  /** 診断結果から選ばれたおすすめ商品（1点） */
+  featuredProduct?: Product;
 };
 
 /** 楽天ロゴ */
@@ -55,8 +58,25 @@ const STORE_BUTTONS = [
   },
 ];
 
-export default function RecommendationCards({ section }: RecommendationCardsProps) {
+export default function RecommendationCards({
+  section,
+  featuredProduct,
+}: RecommendationCardsProps) {
   const { title, subtitle, items } = section;
+
+  // recommendations.ts の items と featuredProduct を統合
+  const allItems = featuredProduct
+    ? [
+        {
+          id: featuredProduct.id,
+          name: featuredProduct.name,
+          priceText: featuredProduct.priceText,
+          url: featuredProduct.url,
+          storeLinks: featuredProduct.storeLinks,
+        },
+        ...items,
+      ]
+    : items;
 
   return (
     <div className="rounded-2xl border border-line bg-surface p-5 shadow-sm sm:p-6">
@@ -71,14 +91,14 @@ export default function RecommendationCards({ section }: RecommendationCardsProp
       </div>
 
       {/* Items or empty state */}
-      {items.length === 0 ? (
+      {allItems.length === 0 ? (
         <div className="rounded-xl bg-sand/20 px-4 py-6 text-center">
           <p className="text-sm text-muted">おすすめ商品は準備中です</p>
           <p className="mt-1 text-xs text-muted/60">近日追加予定</p>
         </div>
       ) : (
         <div className="space-y-3">
-          {items.map((item, i) => (
+          {allItems.map((item, i) => (
             <div
               key={item.id}
               className="animate-soft-pop rounded-xl border border-line bg-bg p-4"
@@ -87,7 +107,7 @@ export default function RecommendationCards({ section }: RecommendationCardsProp
               <h4 className="text-center font-heading text-base leading-snug tracking-[0.04em] text-ink">
                 {item.name}
               </h4>
-              {item.description && (
+              {"description" in item && item.description && (
                 <p className="mt-1 text-center text-xs text-muted">
                   {item.description}
                 </p>
