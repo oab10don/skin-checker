@@ -12,7 +12,7 @@ export default function Home() {
   });
 
   return (
-    <div className="flex min-h-dvh flex-col px-5 py-10 sm:px-4 sm:py-16">
+    <div className="flex min-h-dvh flex-col px-5 py-6 sm:px-4 sm:py-10">
       <div className="mx-auto w-full max-w-xl">
         <Header />
       </div>
@@ -20,27 +20,45 @@ export default function Home() {
       <div className="mx-auto flex flex-1 flex-col items-center justify-center text-center">
         {/* Hero */}
         <div>
-          <h1 className="font-serif text-[1.625rem] font-bold leading-[1.75] tracking-[0.04em] text-ink sm:text-4xl sm:leading-[1.6]">
+          <h1 className="font-serif text-[1.625rem] font-bold leading-[1.85] tracking-[0.04em] text-ink sm:text-4xl sm:leading-[1.7]">
             <span
               className="animate-hero-reveal inline-block"
               style={{ animationDelay: "0.15s" }}
             >
-              今日の肌を 知ることから
+              今日の肌を
             </span>
             <br />
             <span
               className="animate-hero-reveal inline-block"
-              style={{ animationDelay: "0.55s" }}
+              style={{ animationDelay: "0.45s" }}
+            >
+              知ることから
+            </span>
+            <br />
+            <span
+              className="animate-hero-reveal inline-block"
+              style={{ animationDelay: "0.75s" }}
             >
               はじまるケア。
             </span>
           </h1>
-          <p
-            className="animate-hero-reveal mx-auto mt-6 max-w-xs text-[0.9rem] leading-[1.9] text-muted sm:max-w-sm sm:text-base sm:leading-relaxed"
-            style={{ animationDelay: "0.9s" }}
-          >
-            10問の質問に答えるだけで、5つの軸から今日の肌状態を分析し、あなたに合ったスキンケアをご提案します。
-          </p>
+          <div className="mx-auto mt-7 max-w-xs sm:max-w-sm">
+            {[
+              "10問の質問に答えるだけ。",
+              "5つの軸から",
+              "今日の肌状態を分析し",
+              "あなたに合ったスキンケアを",
+              "ご提案します。",
+            ].map((line, i) => (
+              <p
+                key={i}
+                className="animate-hero-reveal text-[0.9rem] leading-[2] text-muted sm:text-base"
+                style={{ animationDelay: `${1.1 + i * 0.12}s` }}
+              >
+                {line}
+              </p>
+            ))}
+          </div>
         </div>
 
         {/* Date */}
