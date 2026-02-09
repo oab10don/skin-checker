@@ -78,7 +78,7 @@ export default function ResultPage() {
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-muted">
             あなたの肌タイプは
           </p>
-          <div className="mb-4">
+          <div className="mb-6">
             <Image
               src={skinTypeImages[primaryType]}
               alt={skinTypeLabels[primaryType]}
