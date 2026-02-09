@@ -24,6 +24,16 @@ export const skinTypeDescriptions: Record<SkinType, string> = {
     "くすみやトーンの不均一が気になるタイプです。ターンオーバーを整えるケアで透明感を取り戻しましょう。",
 };
 
+export const skinTypeImages: Record<SkinType, string> = {
+  dry: "/images/skin-types/dry.png",
+  oily: "/images/skin-types/oily.png",
+  combination: "/images/skin-types/combination.png",
+  sensitive: "/images/skin-types/sensitive.png",
+  innerDry: "/images/skin-types/inner-dry.png",
+  pores: "/images/skin-types/pores.png",
+  dullness: "/images/skin-types/dullness.png",
+};
+
 export const scoreAxisLabels: Record<ScoreAxis, string> = {
   moisture: "乾燥度",
   sebum: "皮脂量",

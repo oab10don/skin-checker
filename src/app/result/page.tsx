@@ -9,7 +9,8 @@ import ShareAndCoupon from "@/components/ShareAndCoupon";
 import RecommendationCards from "@/components/RecommendationCards";
 import ProductCards from "@/components/ProductCards";
 import ShopModal from "@/components/ShopModal";
-import { skinTypeLabels, skinTypeDescriptions } from "@/lib/labels";
+import Image from "next/image";
+import { skinTypeLabels, skinTypeDescriptions, skinTypeImages } from "@/lib/labels";
 import { recommendations } from "@/lib/recommendations";
 import { recommendProducts } from "@/lib/products";
 import type { DiagnosisResult } from "@/lib/types";
@@ -77,6 +78,16 @@ export default function ResultPage() {
           <p className="mb-3 text-sm tracking-widest text-muted">
             あなたの肌タイプは
           </p>
+          <div className="mb-5">
+            <Image
+              src={skinTypeImages[primaryType]}
+              alt={skinTypeLabels[primaryType]}
+              width={240}
+              height={240}
+              className="mx-auto h-40 w-40 object-contain sm:h-48 sm:w-48"
+              priority
+            />
+          </div>
           <div className="mx-auto mb-5 inline-block rounded-2xl border border-sage/30 bg-sage/5 px-8 py-5">
             <h1 className="font-serif text-3xl font-bold tracking-[0.06em] text-sage-dark sm:text-4xl">
               {skinTypeLabels[primaryType]}
