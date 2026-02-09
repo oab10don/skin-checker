@@ -95,7 +95,7 @@ export default function DiagnosePage() {
   return (
     <div className="min-h-dvh px-4 py-6 sm:py-10">
       <div className="mx-auto max-w-xl">
-        <Header showBack />
+        <Header />
         <ProgressBar current={currentIndex + 1} total={questions.length} />
 
         <div key={currentIndex} className="animate-fade-up">

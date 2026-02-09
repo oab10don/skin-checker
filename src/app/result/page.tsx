@@ -71,14 +71,14 @@ export default function ResultPage() {
   return (
     <div className="min-h-dvh px-4 py-10 sm:py-16">
       <div className="mx-auto max-w-xl">
-        <Header showBack />
+        <Header />
 
         {/* Type header */}
-        <div className="animate-fade-up mb-12 text-center">
-          <p className="mb-3 text-sm tracking-widest text-muted">
+        <div className="animate-fade-up mb-10 rounded-2xl border border-line bg-surface p-5 text-center shadow-sm sm:p-6">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-muted">
             あなたの肌タイプは
           </p>
-          <div className="mb-5">
+          <div className="mb-4">
             <Image
               src={skinTypeImages[primaryType]}
               alt={skinTypeLabels[primaryType]}
@@ -88,11 +88,9 @@ export default function ResultPage() {
               priority
             />
           </div>
-          <div className="mx-auto mb-5 inline-block rounded-2xl border border-sage/30 bg-sage/5 px-8 py-5">
-            <h1 className="font-serif text-3xl font-bold tracking-[0.06em] text-sage-dark sm:text-4xl">
-              {skinTypeLabels[primaryType]}
-            </h1>
-          </div>
+          <h1 className="mb-3 whitespace-nowrap font-serif text-2xl font-bold tracking-[0.06em] text-sage-dark min-[400px]:text-3xl sm:text-4xl">
+            {skinTypeLabels[primaryType]}
+          </h1>
           <p className="mx-auto max-w-sm text-sm leading-relaxed text-muted">
             {skinTypeDescriptions[primaryType]}
           </p>
