@@ -23,7 +23,7 @@ export default function ProductCards({ title, products }: ProductCardsProps) {
             style={{ animationDelay: `${0.1 + i * 0.05}s` }}
           >
             <div className="p-5">
-              <h3 className="mb-1 font-serif text-lg leading-snug text-ink">
+              <h3 className="mb-1 font-heading text-lg leading-snug text-ink">
                 {product.name}
               </h3>
               {product.priceText && (

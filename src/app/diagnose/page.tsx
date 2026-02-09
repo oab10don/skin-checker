@@ -56,7 +56,7 @@ export default function DiagnosePage() {
         <ProgressBar current={currentIndex + 1} total={questions.length} />
 
         <div key={currentIndex} className="animate-fade-up">
-          <h2 className="mb-6 font-serif text-xl leading-relaxed text-ink sm:text-2xl">
+          <h2 className="mb-6 font-heading text-xl leading-relaxed text-ink sm:text-2xl">
             Q{question.id}. {question.text}
           </h2>
 

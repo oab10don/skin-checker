@@ -12,10 +12,8 @@
   --line: rgba(31, 41, 55, 0.12);
   --terracotta: #b86a4b;
 
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans",
-    "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
-  --font-serif: ui-serif, "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho",
-    serif;
+  --font-heading: var(--font-heading, ui-serif, serif);
+  --font-body: var(--font-body, ui-sans-serif, system-ui, sans-serif);
 }
 
 /* ── Tailwind v4 theme mapping ─────────────────── */
@@ -29,8 +27,8 @@
   --color-sand: var(--sand);
   --color-line: var(--line);
   --color-terracotta: var(--terracotta);
-  --font-sans: var(--font-sans);
-  --font-serif: var(--font-serif);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
 }
 
 /* ── Base styles ───────────────────────────────── */
@@ -87,6 +85,7 @@ body {
 .stagger-2 { animation-delay: 0.2s; }
 .stagger-3 { animation-delay: 0.3s; }
 .stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,

@@ -6,10 +6,10 @@ type HeaderProps = {
 
 export default function Header({ showBack = false }: HeaderProps) {
   return (
-    <nav className="mb-8 flex items-center justify-between">
+    <nav className="mb-10 flex items-center justify-between">
       <Link
         href="/"
-        className="font-serif text-lg tracking-wide text-ink transition-colors hover:text-sage-dark"
+        className="text-[13px] tracking-[0.12em] text-ink/80 transition-colors hover:text-ink"
       >
         MARIKO SHIMODOZONO
       </Link>
