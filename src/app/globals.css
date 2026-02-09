@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────── */
+:root {
+  --bg: #faf8f3;
+  --surface: #ffffff;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --sage: #7b8f7a;
+  --sageDark: #5f765e;
+  --sand: #e8ddcf;
+  --line: rgba(31, 41, 55, 0.12);
+  --terracotta: #b86a4b;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --font-serif: ui-serif, "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho",
+    serif;
+}
+
+/* ── Tailwind v4 theme mapping ─────────────────── */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-sage: var(--sage);
+  --color-sage-dark: var(--sageDark);
+  --color-sand: var(--sand);
+  --color-line: var(--line);
+  --color-terracotta: var(--terracotta);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+}
+
+/* ── Base styles ───────────────────────────────── */
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+}
+
+/* ── Grain texture overlay ─────────────────────── */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ── Animations ────────────────────────────────── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soft-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s ease-out both;
+}
+
+.animate-soft-pop {
+  animation: soft-pop 0.35s ease-out both;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-soft-pop {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
