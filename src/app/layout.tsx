@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Noto_Sans_JP } from "next/font/google";
+import { Shippori_Mincho, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+const shipporiMincho = Shippori_Mincho({
+  weight: ["400", "500"],
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
@@ -26,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${playfair.variable} ${notoSansJP.variable}`}>
+    <html lang="ja" className={`${shipporiMincho.variable} ${notoSansJP.variable}`}>
       <body className="grain font-body antialiased">{children}</body>
     </html>
   );

@@ -20,7 +20,7 @@ export default function Home() {
       <div className="mx-auto flex flex-1 flex-col items-center justify-center text-center">
         {/* Hero */}
         <div className="animate-fade-up">
-          <h1 className="font-heading text-3xl leading-snug text-ink sm:text-4xl">
+          <h1 className="font-heading text-3xl leading-snug tracking-[0.06em] text-ink sm:text-4xl">
             あなたの肌タイプを
             <br />
             知ることから始めよう
@@ -41,7 +41,7 @@ export default function Home() {
         <div className="animate-fade-up stagger-2 mt-8 flex flex-col items-center">
           <Link
             href="/diagnose"
-            className="inline-block rounded-full bg-sage px-7 py-4 text-base font-medium text-white shadow-sm transition-all hover:bg-sage-dark hover:shadow-md"
+            className="inline-block rounded-full bg-sage px-7 py-4 text-base font-medium text-white shadow-sm transition-all hover:bg-sage-dark"
           >
             今日の診断を始める
           </Link>

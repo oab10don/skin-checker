@@ -61,7 +61,7 @@ export default function ResultPage() {
             あなたの肌タイプは
           </p>
           <div className="mx-auto mb-5 inline-block rounded-2xl border border-sage/30 bg-sage/5 px-8 py-5">
-            <h1 className="font-heading text-3xl font-bold tracking-wide text-sage-dark sm:text-4xl">
+            <h1 className="font-heading text-3xl font-medium tracking-[0.06em] text-sage-dark sm:text-4xl">
               {skinTypeLabels[primaryType]}
             </h1>
           </div>

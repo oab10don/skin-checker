@@ -11,9 +11,9 @@ const AXES: ScoreAxis[] = ["moisture", "sebum", "sensitive", "pores", "dullness"
 
 const BAR_COLORS: Record<ScoreAxis, { bar: string; bg: string }> = {
   moisture: { bar: "bg-sage", bg: "bg-sage/15" },
-  sebum: { bar: "bg-sand", bg: "bg-sand/40" },
+  sebum: { bar: "bg-[#8a7e6b]", bg: "bg-[#8a7e6b]/15" },
   sensitive: { bar: "bg-terracotta", bg: "bg-terracotta/15" },
-  pores: { bar: "bg-sage-dark", bg: "bg-sage-dark/15" },
+  pores: { bar: "bg-[#5a6e5a]", bg: "bg-[#5a6e5a]/15" },
   dullness: { bar: "bg-[#a89080]", bg: "bg-[#a89080]/15" },
 };
 

@@ -2,12 +2,12 @@
 
 /* ── Design tokens ─────────────────────────────── */
 :root {
-  --bg: #faf8f3;
+  --bg: #fbfaf7;
   --surface: #ffffff;
   --ink: #1f2937;
   --muted: #6b7280;
-  --sage: #7b8f7a;
-  --sageDark: #5f765e;
+  --sage: #2f3a2f;
+  --sageDark: #232b23;
   --sand: #e8ddcf;
   --line: rgba(31, 41, 55, 0.12);
   --terracotta: #b86a4b;

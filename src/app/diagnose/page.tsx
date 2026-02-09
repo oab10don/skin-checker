@@ -56,7 +56,7 @@ export default function DiagnosePage() {
         <ProgressBar current={currentIndex + 1} total={questions.length} />
 
         <div key={currentIndex} className="animate-fade-up">
-          <h2 className="mb-6 font-heading text-xl leading-relaxed text-ink sm:text-2xl">
+          <h2 className="mb-6 font-heading text-xl leading-relaxed tracking-[0.06em] text-ink sm:text-2xl">
             Q{question.id}. {question.text}
           </h2>
 
@@ -74,7 +74,7 @@ export default function DiagnosePage() {
                       ? "border-sage bg-sage/10 text-sage-dark"
                       : hasSelection
                         ? "border-line bg-surface text-ink opacity-50"
-                        : "border-line bg-surface text-ink hover:border-sage hover:shadow-md active:scale-[0.98]"
+                        : "border-line bg-surface text-ink hover:border-sage/40 hover:shadow-sm active:scale-[0.98]"
                   }`}
                 >
                   <span className="flex-1">{option.label}</span>

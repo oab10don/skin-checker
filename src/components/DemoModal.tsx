@@ -38,7 +38,7 @@ export default function DemoModal() {
       <div className="animate-soft-pop mx-4 w-full max-w-sm rounded-2xl bg-surface p-8 text-center shadow-xl">
         <h2
           id="demo-modal-title"
-          className="font-heading text-lg tracking-wide text-ink"
+          className="font-heading text-lg tracking-[0.06em] text-ink"
         >
           DEMO版について
         </h2>
