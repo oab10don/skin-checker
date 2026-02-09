@@ -19,19 +19,29 @@ export default function DiagnosePage() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
 
-  // Restore saved progress on mount
+  // Restore saved progress only on page reload (not on fresh navigation)
   useEffect(() => {
-    const saved = sessionStorage.getItem(PROGRESS_KEY);
-    if (saved) {
-      try {
-        const { currentIndex: ci, answers: ans } = JSON.parse(saved);
-        if (typeof ci === "number" && Array.isArray(ans)) {
-          setCurrentIndex(ci);
-          setAnswers(ans);
+    const navEntries = performance.getEntriesByType("navigation");
+    const isReload =
+      navEntries.length > 0 &&
+      (navEntries[0] as PerformanceNavigationTiming).type === "reload";
+
+    if (isReload) {
+      const saved = sessionStorage.getItem(PROGRESS_KEY);
+      if (saved) {
+        try {
+          const { currentIndex: ci, answers: ans } = JSON.parse(saved);
+          if (typeof ci === "number" && Array.isArray(ans)) {
+            setCurrentIndex(ci);
+            setAnswers(ans);
+          }
+        } catch {
+          /* ignore */
         }
-      } catch {
-        /* ignore */
       }
+    } else {
+      // Fresh navigation: clear old progress
+      sessionStorage.removeItem(PROGRESS_KEY);
     }
     setMounted(true);
   }, []);
