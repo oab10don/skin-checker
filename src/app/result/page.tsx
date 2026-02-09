@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Header from "@/components/Header";
 import ScoreBars from "@/components/ScoreBars";
+import ShareAndCoupon from "@/components/ShareAndCoupon";
 import ProductCards from "@/components/ProductCards";
 import { skinTypeLabels, skinTypeDescriptions } from "@/lib/labels";
 import { recommendProducts } from "@/lib/products";
@@ -85,8 +86,11 @@ export default function ResultPage() {
           <ScoreBars scores={scores} />
         </div>
 
+        {/* Share & Coupon */}
+        <ShareAndCoupon />
+
         {/* Products */}
-        <div className="animate-fade-up stagger-2 mb-10 space-y-8">
+        <div className="animate-fade-up stagger-4 mb-10 space-y-8">
           <ProductCards title="あなたの肌タイプにおすすめ" products={primary} />
           {secondary.length > 0 && (
             <ProductCards title="サブタイプ向けのケア" products={secondary} />
@@ -94,7 +98,7 @@ export default function ResultPage() {
         </div>
 
         {/* Retry */}
-        <div className="animate-fade-up stagger-3 mb-8 text-center">
+        <div className="animate-fade-up stagger-5 mb-8 text-center">
           <Link
             href="/"
             className="inline-block rounded-full border border-line px-8 py-3 text-base font-medium text-ink transition-colors hover:border-sage hover:bg-sage/5"
@@ -104,7 +108,7 @@ export default function ResultPage() {
         </div>
 
         {/* Disclaimer */}
-        <p className="animate-fade-up stagger-4 border-t border-line pt-6 text-center text-[11px] leading-relaxed text-muted/60">
+        <p className="animate-fade-up border-t border-line pt-6 text-center text-[11px] leading-relaxed text-muted/60">
           ※ この診断結果は医療行為ではありません。スキンケアの参考としてご活用ください。
           <br />
           肌トラブルが続く場合は、皮膚科医にご相談ください。

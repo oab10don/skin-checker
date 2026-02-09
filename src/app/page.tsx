@@ -21,23 +21,22 @@ export default function Home() {
         {/* Hero */}
         <div className="animate-fade-up">
           <h1 className="font-heading text-3xl leading-snug tracking-[0.06em] text-ink sm:text-4xl">
-            あなたの肌タイプを
+            今日の肌状態を知ることから
             <br />
-            知ることから始めよう
+            始めましょう
           </h1>
           <p className="mx-auto mt-5 max-w-sm text-base leading-relaxed text-muted">
-            10問の質問に答えるだけで、5つの軸からあなたの肌を分析。
-            ぴったりのスキンケアアイテムをご提案します。
+            10問の質問に答えるだけで、5つの軸から今日の肌状態を分析し、あなたに合ったスキンケアをご提案します。
           </p>
         </div>
 
         {/* Date */}
-        <p className="animate-fade-up stagger-1 mt-10 text-sm tracking-wide text-ink">
+        <p className="animate-fade-up stagger-1 mt-8 text-sm tracking-wide text-ink">
           {today}
         </p>
 
         {/* CTA */}
-        <div className="animate-fade-up stagger-2 mt-8 flex flex-col items-center">
+        <div className="animate-fade-up stagger-2 mt-2 flex flex-col items-center">
           <Link
             href="/diagnose"
             className="inline-block rounded-full bg-sage px-7 py-4 text-base font-medium text-white shadow-sm transition-all hover:bg-sage-dark"
