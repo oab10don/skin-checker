@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import ProgressBar from "@/components/ProgressBar";
@@ -18,37 +18,29 @@ export default function DiagnosePage() {
   );
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
+  const completedRef = useRef(false);
 
-  // Restore saved progress only on page reload (not on fresh navigation)
+  // On mount: restore progress only if diagProgress exists AND was not
+  // cleared by the calling page (home/result clear it before navigating).
   useEffect(() => {
-    const navEntries = performance.getEntriesByType("navigation");
-    const isReload =
-      navEntries.length > 0 &&
-      (navEntries[0] as PerformanceNavigationTiming).type === "reload";
-
-    if (isReload) {
-      const saved = sessionStorage.getItem(PROGRESS_KEY);
-      if (saved) {
-        try {
-          const { currentIndex: ci, answers: ans } = JSON.parse(saved);
-          if (typeof ci === "number" && Array.isArray(ans)) {
-            setCurrentIndex(ci);
-            setAnswers(ans);
-          }
-        } catch {
-          /* ignore */
+    const saved = sessionStorage.getItem(PROGRESS_KEY);
+    if (saved) {
+      try {
+        const { currentIndex: ci, answers: ans } = JSON.parse(saved);
+        if (typeof ci === "number" && Array.isArray(ans)) {
+          setCurrentIndex(ci);
+          setAnswers(ans);
         }
+      } catch {
+        /* ignore */
       }
-    } else {
-      // Fresh navigation: clear old progress
-      sessionStorage.removeItem(PROGRESS_KEY);
     }
     setMounted(true);
   }, []);
 
-  // Save progress when state changes
+  // Save progress on every state change (unless diagnosis is completed)
   useEffect(() => {
-    if (mounted) {
+    if (mounted && !completedRef.current) {
       sessionStorage.setItem(
         PROGRESS_KEY,
         JSON.stringify({ currentIndex, answers })
@@ -65,15 +57,18 @@ export default function DiagnosePage() {
       setTimeout(() => {
         const next = [...answers];
         next[currentIndex] = delta;
-        setAnswers(next);
 
         if (currentIndex === questions.length - 1) {
+          // Mark as completed BEFORE state updates to prevent save effect
+          completedRef.current = true;
           const deltas = next.filter((d): d is ScoreDelta => d !== null);
           const result = diagnose(deltas);
           sessionStorage.setItem("skinDiagnosisResult", JSON.stringify(result));
           sessionStorage.removeItem(PROGRESS_KEY);
+          setAnswers(next);
           router.push("/result");
         } else {
+          setAnswers(next);
           setCurrentIndex((i) => i + 1);
           setSelectedIndex(null);
         }

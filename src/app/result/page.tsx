@@ -143,6 +143,7 @@ export default function ResultPage() {
         <div className="animate-fade-up stagger-5 mb-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
           <Link
             href="/"
+            onClick={() => sessionStorage.removeItem("diagProgress")}
             className="inline-block w-full rounded-full border border-line px-8 py-3 text-center text-base font-medium text-ink transition-colors hover:border-sage hover:bg-sage/5 sm:w-auto"
           >
             もう一度診断する
