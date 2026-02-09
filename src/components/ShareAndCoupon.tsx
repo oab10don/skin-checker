@@ -1,21 +1,8 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 
-const SHARED_KEY = "skin-check-has-shared";
 const COUPON_CODE = "SKIN-2026";
-
-/* ── localStorage 読み取り（useSyncExternalStore） ── */
-function getSnapshot(): string | null {
-  return localStorage.getItem(SHARED_KEY);
-}
-function getServerSnapshot(): string | null {
-  return null;
-}
-function subscribe(cb: () => void): () => void {
-  window.addEventListener("storage", cb);
-  return () => window.removeEventListener("storage", cb);
-}
 
 /* ── アイコン ── */
 function LineIcon() {
@@ -35,10 +22,7 @@ function XIcon() {
 }
 
 export default function ShareAndCoupon() {
-  const stored = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-  const [justShared, setJustShared] = useState(false);
-
-  const hasShared = !!stored || justShared;
+  const [hasShared, setHasShared] = useState(false);
 
   function handleShare(platform: "line" | "x") {
     const url = encodeURIComponent(window.location.href);
@@ -47,9 +31,8 @@ export default function ShareAndCoupon() {
         ? `https://social-plugins.line.me/lineit/share?url=${url}`
         : `https://twitter.com/intent/tweet?text=${encodeURIComponent("今日の肌診断結果をチェック")}&url=${url}`;
 
-    window.location.href = shareUrl;
-    localStorage.setItem(SHARED_KEY, "1");
-    setJustShared(true);
+    window.open(shareUrl, "_blank", "noopener,noreferrer");
+    setHasShared(true);
   }
 
   return (
