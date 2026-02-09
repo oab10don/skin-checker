@@ -7,11 +7,11 @@ type ProductCardsProps = {
   products: Product[];
 };
 
-/** 楽天ロゴ（Rマーク簡易版） */
+/** 楽天ロゴ（Rマーク） */
 function RakutenLogo() {
   return (
     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M13.5 3C10.46 3 8 5.46 8 8.5c0 1.83.9 3.45 2.27 4.45L7.5 21h3.04l2.23-6.52c.24.02.48.02.73.02.37 0 .73-.03 1.08-.09L16.5 21h3.04l-3.18-9.15C18.04 10.68 19 9.7 19 8.5 19 5.46 16.54 3 13.5 3zm0 8c-1.93 0-3.5-1.57-3.5-3.5S11.57 4 13.5 4 17 5.57 17 7.5 15.43 11 13.5 11z" />
+      <path d="M6 4h7a5 5 0 0 1 3.5 8.6L21 21h-3.5l-4.2-7.5H9V21H6V4zm3 2.5v5h4a2.5 2.5 0 0 0 0-5H9z" />
     </svg>
   );
 }
@@ -61,7 +61,7 @@ export default function ProductCards({ title, products }: ProductCardsProps) {
 
   return (
     <div>
-      <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-muted">
+      <p className="mb-3 text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
         {title}
       </p>
       <div className="space-y-3">
@@ -72,11 +72,11 @@ export default function ProductCards({ title, products }: ProductCardsProps) {
             style={{ animationDelay: `${0.1 + i * 0.05}s` }}
           >
             <div className="p-5">
-              <h3 className="mb-1 font-heading text-lg leading-snug tracking-[0.04em] text-ink">
+              <h3 className="mb-1 text-center font-heading text-lg leading-snug tracking-[0.04em] text-ink">
                 {product.name}
               </h3>
               {product.priceText && (
-                <p className="mb-4 text-sm text-muted">{product.priceText}</p>
+                <p className="mb-4 text-center text-sm text-muted">{product.priceText}</p>
               )}
               <div className="flex gap-2">
                 {STORE_BUTTONS.map(({ key, label, icon: Icon, className }) => {

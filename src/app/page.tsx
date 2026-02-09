@@ -19,24 +19,43 @@ export default function Home() {
 
       <div className="mx-auto flex flex-1 flex-col items-center justify-center text-center">
         {/* Hero */}
-        <div className="animate-fade-up">
-          <h1 className="font-heading text-[1.625rem] leading-[1.65] tracking-[0.06em] text-ink sm:text-4xl sm:leading-snug">
-            今日の肌状態を知ることから
+        <div>
+          <h1 className="font-serif text-[1.625rem] font-bold leading-[1.75] tracking-[0.04em] text-ink sm:text-4xl sm:leading-[1.6]">
+            <span
+              className="animate-hero-reveal inline-block"
+              style={{ animationDelay: "0.15s" }}
+            >
+              今日の肌を 知ることから
+            </span>
             <br />
-            始めましょう
+            <span
+              className="animate-hero-reveal inline-block"
+              style={{ animationDelay: "0.55s" }}
+            >
+              はじまるケア。
+            </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-xs text-[0.9rem] leading-[1.9] text-muted sm:max-w-sm sm:text-base sm:leading-relaxed">
+          <p
+            className="animate-hero-reveal mx-auto mt-6 max-w-xs text-[0.9rem] leading-[1.9] text-muted sm:max-w-sm sm:text-base sm:leading-relaxed"
+            style={{ animationDelay: "0.9s" }}
+          >
             10問の質問に答えるだけで、5つの軸から今日の肌状態を分析し、あなたに合ったスキンケアをご提案します。
           </p>
         </div>
 
         {/* Date */}
-        <p className="animate-fade-up stagger-1 mt-10 text-sm tracking-wide text-ink">
+        <p
+          className="animate-hero-reveal mt-10 text-sm tracking-wide text-ink"
+          style={{ animationDelay: "1.2s" }}
+        >
           {today}
         </p>
 
         {/* CTA */}
-        <div className="animate-fade-up stagger-2 mt-3 flex flex-col items-center">
+        <div
+          className="animate-hero-reveal mt-3 flex flex-col items-center"
+          style={{ animationDelay: "1.4s" }}
+        >
           <Link
             href="/diagnose"
             className="inline-block rounded-full bg-sage px-7 py-4 text-base font-medium text-white shadow-sm transition-all hover:bg-sage-dark"
@@ -52,7 +71,10 @@ export default function Home() {
         </div>
 
         {/* Feature chips */}
-        <div className="animate-fade-up stagger-3 mt-14 flex flex-wrap justify-center gap-2">
+        <div
+          className="animate-hero-reveal mt-14 flex flex-wrap justify-center gap-2"
+          style={{ animationDelay: "1.7s" }}
+        >
           {["7タイプ判定", "5軸スコア分析", "おすすめ商品紹介"].map(
             (chip) => (
               <span
@@ -66,7 +88,10 @@ export default function Home() {
         </div>
 
         {/* Disclaimer */}
-        <p className="animate-fade-up stagger-4 mt-14 max-w-xs text-xs leading-relaxed text-muted/60">
+        <p
+          className="animate-hero-reveal mt-14 max-w-xs text-xs leading-relaxed text-muted/60"
+          style={{ animationDelay: "1.9s" }}
+        >
           ※ この診断は医療行為ではありません。スキンケアの参考としてお楽しみください。
         </p>
       </div>

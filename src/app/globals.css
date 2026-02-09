@@ -15,6 +15,7 @@
   --font-display: var(--font-display, ui-serif, serif);
   --font-heading: var(--font-heading, ui-serif, serif);
   --font-body: var(--font-body, ui-sans-serif, system-ui, sans-serif);
+  --font-serif: ui-serif, "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
 }
 
 /* ── Tailwind v4 theme mapping ─────────────────── */
@@ -31,6 +32,7 @@
   --font-display: var(--font-display);
   --font-heading: var(--font-heading);
   --font-body: var(--font-body);
+  --font-serif: var(--font-serif);
 }
 
 /* ── Base styles ───────────────────────────────── */
@@ -89,11 +91,31 @@ body {
 .stagger-4 { animation-delay: 0.4s; }
 .stagger-5 { animation-delay: 0.5s; }
 
+/* ── Hero reveal animation ───────────────────── */
+@keyframes hero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-hero-reveal {
+  animation: hero-reveal 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
-  .animate-soft-pop {
+  .animate-soft-pop,
+  .animate-hero-reveal {
     animation: none;
     opacity: 1;
     transform: none;
+    filter: none;
   }
 }

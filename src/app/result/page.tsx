@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Header from "@/components/Header";
 import ScoreBars from "@/components/ScoreBars";
 import ShareAndCoupon from "@/components/ShareAndCoupon";
 import ProductCards from "@/components/ProductCards";
+import ShopModal from "@/components/ShopModal";
 import { skinTypeLabels, skinTypeDescriptions } from "@/lib/labels";
 import { recommendProducts } from "@/lib/products";
 import type { DiagnosisResult } from "@/lib/types";
@@ -29,16 +30,22 @@ function subscribe(callback: () => void): () => void {
 export default function ResultPage() {
   const router = useRouter();
   const stored = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [mounted, setMounted] = useState(false);
+  const [shopOpen, setShopOpen] = useState(false);
 
   const result: DiagnosisResult | null = stored
     ? (JSON.parse(stored) as DiagnosisResult)
     : null;
 
   useEffect(() => {
-    if (!result) {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted && !result) {
       router.replace("/");
     }
-  }, [result, router]);
+  }, [mounted, result, router]);
 
   if (!result) {
     return (
@@ -62,7 +69,7 @@ export default function ResultPage() {
             あなたの肌タイプは
           </p>
           <div className="mx-auto mb-5 inline-block rounded-2xl border border-sage/30 bg-sage/5 px-8 py-5">
-            <h1 className="font-heading text-3xl font-medium tracking-[0.06em] text-sage-dark sm:text-4xl">
+            <h1 className="font-serif text-3xl font-bold tracking-[0.06em] text-sage-dark sm:text-4xl">
               {skinTypeLabels[primaryType]}
             </h1>
           </div>
@@ -80,7 +87,7 @@ export default function ResultPage() {
 
         {/* Scores */}
         <div className="animate-fade-up stagger-1 mb-10 rounded-2xl border border-line bg-surface p-5 shadow-sm sm:p-6">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted">
+          <p className="mb-4 text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
             スコア詳細
           </p>
           <ScoreBars scores={scores} />
@@ -89,22 +96,38 @@ export default function ResultPage() {
         {/* Share & Coupon */}
         <ShareAndCoupon />
 
-        {/* Products */}
-        <div className="animate-fade-up stagger-4 mb-10 space-y-8">
-          <ProductCards title="あなたの肌タイプにおすすめ" products={primary} />
-          {secondary.length > 0 && (
-            <ProductCards title="サブタイプ向けのケア" products={secondary} />
-          )}
+        {/* Products - emphasized */}
+        <div className="animate-fade-up stagger-4 mb-10">
+          <div className="mb-6 text-center">
+            <span className="inline-block rounded-full bg-sage/10 px-4 py-1.5 text-xs font-medium tracking-[0.1em] text-sage-dark">
+              あなただけのケア提案
+            </span>
+            <h2 className="mt-3 font-serif text-xl font-bold tracking-wide text-ink">
+              おすすめスキンケア
+            </h2>
+          </div>
+          <div className="space-y-8">
+            <ProductCards title="あなたの肌タイプにおすすめ" products={primary} />
+            {secondary.length > 0 && (
+              <ProductCards title="サブタイプ向けのケア" products={secondary} />
+            )}
+          </div>
         </div>
 
-        {/* Retry */}
-        <div className="animate-fade-up stagger-5 mb-8 text-center">
+        {/* Action buttons */}
+        <div className="animate-fade-up stagger-5 mb-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
           <Link
             href="/"
-            className="inline-block rounded-full border border-line px-8 py-3 text-base font-medium text-ink transition-colors hover:border-sage hover:bg-sage/5"
+            className="inline-block w-full rounded-full border border-line px-8 py-3 text-center text-base font-medium text-ink transition-colors hover:border-sage hover:bg-sage/5 sm:w-auto"
           >
             もう一度診断する
           </Link>
+          <button
+            onClick={() => setShopOpen(true)}
+            className="inline-block w-full rounded-full bg-sage px-8 py-3 text-center text-base font-medium text-white shadow-sm transition-all hover:bg-sage-dark sm:w-auto"
+          >
+            ショップを見る
+          </button>
         </div>
 
         {/* Disclaimer */}
@@ -114,6 +137,8 @@ export default function ResultPage() {
           肌トラブルが続く場合は、皮膚科医にご相談ください。
         </p>
       </div>
+
+      <ShopModal open={shopOpen} onClose={() => setShopOpen(false)} />
     </div>
   );
 }

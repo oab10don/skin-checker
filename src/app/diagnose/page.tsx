@@ -1,12 +1,14 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import ProgressBar from "@/components/ProgressBar";
 import { questions } from "@/lib/questions";
 import { diagnose } from "@/lib/scoring";
 import type { ScoreDelta } from "@/lib/types";
+
+const PROGRESS_KEY = "diagProgress";
 
 export default function DiagnosePage() {
   const router = useRouter();
@@ -15,6 +17,34 @@ export default function DiagnosePage() {
     () => new Array(questions.length).fill(null)
   );
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  // Restore saved progress on mount
+  useEffect(() => {
+    const saved = sessionStorage.getItem(PROGRESS_KEY);
+    if (saved) {
+      try {
+        const { currentIndex: ci, answers: ans } = JSON.parse(saved);
+        if (typeof ci === "number" && Array.isArray(ans)) {
+          setCurrentIndex(ci);
+          setAnswers(ans);
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+    setMounted(true);
+  }, []);
+
+  // Save progress when state changes
+  useEffect(() => {
+    if (mounted) {
+      sessionStorage.setItem(
+        PROGRESS_KEY,
+        JSON.stringify({ currentIndex, answers })
+      );
+    }
+  }, [currentIndex, answers, mounted]);
 
   const question = questions[currentIndex];
 
@@ -22,7 +52,6 @@ export default function DiagnosePage() {
     (delta: ScoreDelta, optIndex: number) => {
       setSelectedIndex(optIndex);
 
-      // 選択後少し間をおいて次へ進む
       setTimeout(() => {
         const next = [...answers];
         next[currentIndex] = delta;
@@ -32,6 +61,7 @@ export default function DiagnosePage() {
           const deltas = next.filter((d): d is ScoreDelta => d !== null);
           const result = diagnose(deltas);
           sessionStorage.setItem("skinDiagnosisResult", JSON.stringify(result));
+          sessionStorage.removeItem(PROGRESS_KEY);
           router.push("/result");
         } else {
           setCurrentIndex((i) => i + 1);
@@ -48,6 +78,14 @@ export default function DiagnosePage() {
       setSelectedIndex(null);
     }
   }, [currentIndex]);
+
+  if (!mounted) {
+    return (
+      <div className="flex min-h-dvh items-center justify-center">
+        <p className="text-sm text-muted">読み込み中...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-dvh px-4 py-6 sm:py-10">
