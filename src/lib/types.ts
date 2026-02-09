@@ -22,11 +22,18 @@ export type Question = {
   }[];
 };
 
+export type StoreLinks = {
+  rakuten?: string;
+  amazon?: string;
+  base?: string;
+};
+
 export type Product = {
   id: string;
   name: string;
   priceText?: string;
   url: string;
+  storeLinks?: StoreLinks;
   tags: SkinType[];
 };
 

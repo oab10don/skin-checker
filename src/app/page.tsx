@@ -31,11 +31,10 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Date & Duration */}
-        <div className="animate-fade-up stagger-1 mt-10 flex flex-col items-center gap-1.5">
-          <p className="text-sm tracking-wide text-ink">{today}</p>
-          <p className="text-xs text-muted/70">所要時間：約1分（全10問）</p>
-        </div>
+        {/* Date */}
+        <p className="animate-fade-up stagger-1 mt-10 text-sm tracking-wide text-ink">
+          {today}
+        </p>
 
         {/* CTA */}
         <div className="animate-fade-up stagger-2 mt-8 flex flex-col items-center">
@@ -46,6 +45,9 @@ export default function Home() {
             今日の診断を始める
           </Link>
           <p className="mt-2 text-xs text-muted/70">
+            所要時間：約1分（全10問）
+          </p>
+          <p className="mt-1 text-xs text-muted/70">
             登録不要・無料で診断できます
           </p>
         </div>
