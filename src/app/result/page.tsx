@@ -6,10 +6,10 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import ScoreBars from "@/components/ScoreBars";
 import ShareAndCoupon from "@/components/ShareAndCoupon";
-import ProductCards from "@/components/ProductCards";
+import RecommendationCards from "@/components/RecommendationCards";
 import ShopModal from "@/components/ShopModal";
 import { skinTypeLabels, skinTypeDescriptions } from "@/lib/labels";
-import { recommendProducts } from "@/lib/products";
+import { recommendations } from "@/lib/recommendations";
 import type { DiagnosisResult } from "@/lib/types";
 
 const STORAGE_KEY = "skinDiagnosisResult";
@@ -56,7 +56,6 @@ export default function ResultPage() {
   }
 
   const { scores, primaryType, secondaryType } = result;
-  const { primary, secondary } = recommendProducts(primaryType, secondaryType);
 
   return (
     <div className="min-h-dvh px-4 py-10 sm:py-16">
@@ -96,21 +95,19 @@ export default function ResultPage() {
         {/* Share & Coupon */}
         <ShareAndCoupon />
 
-        {/* Products - emphasized */}
+        {/* Recommendations - 2 sections */}
         <div className="animate-fade-up stagger-4 mb-10">
           <div className="mb-6 text-center">
             <span className="inline-block rounded-full bg-sage/10 px-4 py-1.5 text-xs font-medium tracking-[0.1em] text-sage-dark">
               あなただけのケア提案
             </span>
             <h2 className="mt-3 font-serif text-xl font-bold tracking-wide text-ink">
-              おすすめスキンケア
+              おすすめアイテム
             </h2>
           </div>
-          <div className="space-y-8">
-            <ProductCards title="あなたの肌タイプにおすすめ" products={primary} />
-            {secondary.length > 0 && (
-              <ProductCards title="サブタイプ向けのケア" products={secondary} />
-            )}
+          <div className="space-y-4">
+            <RecommendationCards section={recommendations.inside} />
+            <RecommendationCards section={recommendations.outside} />
           </div>
         </div>
 

@@ -9,7 +9,7 @@ export default function Header({ showBack = false }: HeaderProps) {
     <nav className="mb-10 flex items-center justify-between">
       <Link
         href="/"
-        className="font-display text-[13px] font-medium tracking-[0.14em] text-ink/80 transition-colors hover:text-ink"
+        className="font-display py-1 text-[10px] font-medium tracking-[0.16em] text-ink/60 transition-colors hover:text-ink sm:text-[11px]"
       >
         MARIKO SHIMODOZONO
       </Link>
